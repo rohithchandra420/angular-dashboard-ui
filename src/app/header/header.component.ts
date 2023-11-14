@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { AuthService } from "../core/auth.service";
 
 @Component({
     selector: 'app-header',
@@ -7,5 +8,14 @@ import { Component } from "@angular/core";
 })
 
 export class HeaderComponent {
+    userRole;
 
+    constructor(private authService: AuthService) {}
+    
+    ngOnInit() {
+        this.authService.userLoggedInEmitter.subscribe( isLoggedIn => {
+            this.userRole = isLoggedIn;
+            console.log(this.userRole);
+        })
+    }
 }

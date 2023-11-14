@@ -10,14 +10,17 @@ import { User } from '../core/user.model';
 export class DashboardComponent implements OnInit {
   user: User;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+   
+  }
 
 
-  ngOnInit(){
+  ngOnInit(){    
     this.user = {
       name: 'TestName',
       userId: this.route.snapshot.params['id'],      
       role: 'Admin'      
     };
+    
   }
 }

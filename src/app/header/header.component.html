@@ -2,8 +2,8 @@
     <span>Dashboard</span>
      <div class="spacer"></div>
        <a mat-button class="active" routerLink="/login">Login</a>
-       <a mat-button class="active" routerLink="/dashboard">Dashboard</a>
-       <a mat-button [routerLink]="['/register']">Register</a>
+       <a mat-button class="active" routerLink="/dashboard" *ngIf="userRole">Dashboard</a>
+       <a mat-button [routerLink]="['/register']" *ngIf="userRole">Register</a>
 </mat-toolbar>
 
 

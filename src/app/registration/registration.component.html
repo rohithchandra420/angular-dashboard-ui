@@ -1,1 +1,24 @@
 <p>registration works!</p>
+<div class="container">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="userName">Name:</label>
+                <input type="text" id="userName" formControlName="userName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="userName">Age:</label>
+                <input type="text" id="age" formControlName="age" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="userName">Email:</label>
+                <input type="email" id="email" formControlName="email" class="form-control">
+                <span *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched" class="help-block">Please enter a valid email</span>
+            </div>
+            <div class="radio" *ngFor="let gender of genders">
+                <label><input type="radio" formControlName="gender" [value]="gender"> {{gender}}</label>
+            </div>
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>

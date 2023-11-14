@@ -8,6 +8,8 @@ import { RegistrationComponent } from "../registration/registration.component";
 import { Observable } from "rxjs";
 import { AuthService } from "./auth.service";
 import { authGuard } from "./auth.guard";
+import { ErrorPageComponent } from "../error-page/error-page.component";
+import { AuthResolver } from "./auth-resolver.service";
 
 const profileGuard: CanActivateFn = (
     route: ActivatedRouteSnapshot,
@@ -44,13 +46,14 @@ const profileGuard: CanActivateFn = (
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     // {
-    //     path: '', canActivate:[authGuard], component: HomeComponent, children: [
+    //     path: '', canActivate:[authGuard], resolve: {userDetails: AuthResolver} , component: HomeComponent, children: [
     //         { path: 'dashboard', component: DashboardComponent },
     //         { path: 'register', component: RegistrationComponent }
     //     ]
     // },
-    { path: 'dashboard',canActivate:[authGuard] , component: DashboardComponent },
-    { path: 'register',canActivate:[authGuard] , component: RegistrationComponent },
+    { path: 'dashboard', canActivate:[authGuard] , component: DashboardComponent },
+    { path: 'register', canActivate:[authGuard] , component: RegistrationComponent },
+    { path: 'error', component: ErrorPageComponent, data: {message: 'Page Under Construction'}},
     { path: '**', redirectTo: '/dashboard' },
 
 ];
