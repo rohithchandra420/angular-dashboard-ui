@@ -5,7 +5,7 @@
           <mat-card-title>Login</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <form class="login-form">
+          <form class="login-form" #loginForm="ngForm">
             <table class="example-full-width" cellspacing="0">
               <tr>
                 <td>
@@ -19,16 +19,18 @@
                 <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
               </mat-form-field></td>
               <td>
-                <span class="error-message">
+                <!-- <span class="error-message" *ngIf="loginError">
                   Please enter valid username and password
-                </span>
+                </span> -->
+                
+              <app-alert [message]="loginError" *ngIf="loginError"></app-alert>
               </td>
             </tr></table>
           </form>
           <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button (click)="login()" color="primary">Login</button>
+          <button mat-raised-button (click)="login()" color="primary" [disabled]="!loginForm.valid">Login</button>
         </mat-card-actions>
     </mat-card>
 </div>

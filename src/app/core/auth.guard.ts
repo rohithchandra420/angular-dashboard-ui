@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
 
 export const authGuard: CanActivateFn = (route, state) => {
   //const authS = inject(AuthService).isAuthenticated();
-  let token = localStorage.getItem('IsLoggedIn');
+  let userData = JSON.parse(localStorage.getItem('userData'));
+  let token = userData ? userData._token : null;
   //authS.isA
   const router = inject(Router);
-  if(token == 'true') {
+  console.log(token);
+  if(token) {
       //router.navigate(['dashboard']);
       return true;
   } else {

@@ -1,26 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from '../core/user.model';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 import { AuthService } from '../core/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   username: string;
   password: string;
   showSpinner: boolean;
   user: User;
+  private errorSub: Subscription;
+  loginError;
 
-  constructor(private router:Router, private authService: AuthService) {
+
+
+  constructor(private http: HttpClient, private authService: AuthService) {
 
   }
 
 
   ngOnInit() {
     this.showSpinner = true;
+    this.errorSub = this.authService.loginErrorMessageEmitter.subscribe(errorMessage => {
+      debugger;
+      this.loginError = errorMessage;
+    })
   }
 
   // login(): void {
@@ -40,15 +51,35 @@ export class LoginComponent implements OnInit {
   //   this.router.navigate(['/dashboard']);
   // }
 
-  login() {        
-    this.authService.logIn();
-    this.router.navigate(['dashboard']);
+  login() {
+    console.log(this.username, this.password);
+    let loginData = {
+      "email": this.username,
+      "password": this.password
+    }
+    this.authService.logIn(loginData);
+
   }
 
   logout() {
     this.authService.logOut();
-}
+  }
 
+  ngOnDestroy() {
+    this.errorSub.unsubscribe();
+  }
+
+  signUp() {
+    let userDetails = {
+      "name": "Admin",
+      "gender": "M",
+      "email": "Admin123@gmail.com",
+      "password": "Admin@123",
+      "bookingId": "TestBookingId1",
+      "ticketId": "TicketID1"
+    };
+    this.authService.signUp(userDetails)
+  }
 
 
 }

@@ -1,11 +1,23 @@
 export class User {
+    public id: string;
     public name: string;
-    public userId: string;
-    public role: string;
+    public email: string;
+    public bookingId: string;
+    public role?: string;
+    public ticketId: string;
+    public _token: string;
 
-    constructor(name: string, userId: string, role: string) {
+    constructor(id: string, name: string, email: string, bookingId: string, role: string, ticketId: string, token: string) {
+        this.id = id;
         this.name = name;
-        this.userId = userId;
+        this.email = email;
+        this.bookingId = bookingId;
         this.role = role;
+        this.ticketId = ticketId;
+        this._token = token;
     }
+
+    // get token() {
+    //     return this._token;
+    // }
 }

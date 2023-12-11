@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+
 import { User } from '../core/user.model';
 
 @Component({
@@ -18,8 +20,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(){    
     this.user = {
       name: 'TestName',
-      userId: this.route.snapshot.params['id'],      
-      role: 'Admin'      
+      bookingId: this.route.snapshot.params['id'],      
+      role: 'Admin',      
+      ticketId: '',
+      email: '',
+      id: '',
+      _token: ''
     };
     
   }

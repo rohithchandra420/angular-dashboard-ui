@@ -10,6 +10,7 @@ import { AuthService } from "./auth.service";
 import { authGuard } from "./auth.guard";
 import { ErrorPageComponent } from "../error-page/error-page.component";
 import { AuthResolver } from "./auth-resolver.service";
+import { AdminComponent } from "../admin/admin.component";
 
 const profileGuard: CanActivateFn = (
     route: ActivatedRouteSnapshot,
@@ -51,8 +52,9 @@ const appRoutes: Routes = [
     //         { path: 'register', component: RegistrationComponent }
     //     ]
     // },
-    { path: 'dashboard', canActivate:[authGuard] , component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent },
     { path: 'register', canActivate:[authGuard] , component: RegistrationComponent },
+    { path: 'admin', canActivate:[authGuard] , component: AdminComponent },
     { path: 'error', component: ErrorPageComponent, data: {message: 'Page Under Construction'}},
     { path: '**', redirectTo: '/dashboard' },
 
